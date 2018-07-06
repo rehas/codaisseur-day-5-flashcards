@@ -21,13 +21,17 @@ function submitFlashCard() {
     var inputFieldCatergory = selectedCatergory()
     var createNewFlashCard= createFlashCard(inputFieldQuestion, inputFieldAnswer, inputFieldCatergory);
     addFlashCardToArray(flashCardArray, createNewFlashCard);
-
-
-
-
-    
   };
-
+var selectedCatergory = function() {
+    var catergories = Array.from(document.getElementsByName('catergory'))
+    for (let index = 0; index < catergories.length; index++) {
+      const element = catergories[index];
+      if (element.checked) {
+      return element.id
+      } else {
+      return "allCat"  
+      }
+    }};
 document.addEventListener('DOMContentLoaded', function() {
     console.log("I'm ready");
     
