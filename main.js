@@ -31,18 +31,14 @@ function submitFlashCard() {
 
 document.addEventListener('DOMContentLoaded', function() {
     console.log("I'm ready");
-    
-    
     // Object model of the flash card
     /* var flashCard = {
         id: "",
         question : "",
-        answer : ""
+        answer : "",
+        category: ""
     } */
     
-    // Add flash card to array (array to be added to, flash card to be added to array)
-  
-
 // Finds the the flash card in the array when provided with the id and array
 
     var findFlashCardInArray = function(fcArray, id){
@@ -67,9 +63,11 @@ document.addEventListener('DOMContentLoaded', function() {
     addFlashCardToArray(flashCardArray, fc2);
     
     var showFlashCardQuestion = function(targetElement, fc){
+        // debugger;
         targetElement.querySelector(".fcNumber").innerText = fc.id;
         targetElement.querySelector(".fcOnScreen").innerText = fc.question;
         console.log("showFlashCardQuestion fired");
+        // debugger;
     }
     var testElem = document.getElementById("flashCardGroup1");
     showFlashCardQuestion(testElem, fc2);
@@ -95,12 +93,53 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    var getDifferentRandomFlashCard = function(fcArray, idToOmit){
+        var randomIndex = Math.floor(Math.random()*fcArray.length);
+        console.log("Random Index is " + randomIndex );
+        if (fcArray[randomIndex].id !== idToOmit){
+        console.log("We're getting a random flash card now");
+
+            console.log(fcArray[randomIndex]);
+            return fcArray[randomIndex]
+        }else{
+            console.log("We're getting a different one now.");
+            return getDifferentRandomFlashCard(fcArray, idToOmit);
+        }
+    }
+
+    //getDifferentRandomFlashCard(flashCardArray, 1);
+
+    var showNextFlashCard = function(targetElement){
+        var te = targetElement;
+        if (targetElement.tagName.toLowerCase() === 'p'){
+            te = targetElement.parentElement;
+            //console.log(te);
+        }
+        var id = parseInt( te.querySelector(".fcNumber").innerHTML);
+        console.log("Current Card ID is : " + id);
+        var fcToBeShown = getDifferentRandomFlashCard(flashCardArray, id);
+        console.log(fcToBeShown);
+        showFlashCardQuestion(te, fcToBeShown);
+        //console.log(flashCardArray);
+    }
+
 // This binds the onclick event of the div to the switchFlashCard Function    
     document.getElementById("flashCardGroup1").addEventListener("click", function(event){
         console.log(event);
         console.log(event.target);
         switchFlashCard(event.target);
     });
+    document.querySelector("body").addEventListener("keydown", function(event){
+        // console.log(event);
+        // console.log(event.target);
+        var keyArr = ["ArrowLeft", "ArrowRight", "ArrowDown", "ArrowUp"]
+        if(keyArr.includes( event.key) ){
+            //console.log("N pressed");
+            var te = document.getElementById("flashCardGroup1");
+            showNextFlashCard(te);
+        }
+    });
+
     
 
 
