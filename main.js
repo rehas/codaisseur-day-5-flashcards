@@ -1,5 +1,7 @@
 var flashCardArray =  JSON.parse( localStorage.getItem("flashCardsArray")) || [];
 
+var pickedCategory = "allCat";
+
 var addFlashCardToArray = function(fcArray, fc){
     fcArray.push(fc);
     console.log(`new flash card added: ${fc.question} - ${fc.answer}`);
@@ -66,9 +68,9 @@ console.log(localStorage.getItem("flashCardsArray") ===null);
 
 if( localStorage.getItem("flashCardsArray") ===null ||  JSON.parse( localStorage.getItem("flashCardsArray")).length < 1){
 
-    var fc1 = createFlashCard("What is Javascript", "It's a programming language", "javascript");
+    var fc1 = createFlashCard("What is Javascript", "It's a programming language", "javascriptCat");
     addFlashCardToArray(flashCardArray, fc1);
-    var fc2 = createFlashCard("What is HTML", "It's a markup language", "HTML");
+    var fc2 = createFlashCard("What is HTML", "It's a markup language", "htmlCat");
     addFlashCardToArray(flashCardArray, fc2);
     var testElem = document.getElementById("flashCardGroup1");
     showFlashCardQuestion(testElem, fc2);
@@ -106,6 +108,14 @@ if( localStorage.getItem("flashCardsArray") ===null ||  JSON.parse( localStorage
     }
 
     var getDifferentRandomFlashCard = function(fcArray, idToOmit){
+
+        if(selectedCatergory !== "allCat"){
+            console.log("Category Different!!!");
+            fcArray1 = fcArray.filter(fc => fc.category === selectedCatergory);
+            console.log(fcArray1);
+        }
+
+
         var randomIndex = Math.floor(Math.random()*fcArray.length);
         console.log("Random Index is " + randomIndex );
         if (fcArray[randomIndex].id !== idToOmit){
@@ -189,6 +199,11 @@ if( localStorage.getItem("flashCardsArray") ===null ||  JSON.parse( localStorage
         deleteCurrentCard(flashCardArray, id);
 
     }
+
+    document.getElementById("categoryPicker").addEventListener("change", function(event){
+        console.log(event.target.id);
+        pickedCategory = event.target.id;
+    })
 
     
 
