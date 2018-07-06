@@ -5,12 +5,13 @@ var addFlashCardToArray = function(fcArray, fc){
 }
 
 // Create new flash card (newQuestion, newAnswer) - Also checks for the current length of the array to give a new id to the flash card
-var createFlashCard = function(newQuestion, newAnswer){
+var createFlashCard = function(newQuestion, newAnswer, category){
     var newId = flashCardArray.length +1;
     return {
         id : newId,
         question: newQuestion,
-        answer: newAnswer
+        answer: newAnswer,
+        category : category
     }
 }
 //Submit flash card function from user data.
@@ -53,9 +54,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     //createFlashCard and addFlashCardToArray should be called as a pair each time to make sure the id's of new flash cards don't mix up.
     
-    var fc1 = createFlashCard("What is Javascript", "It's a programming language");
+    var fc1 = createFlashCard("What is Javascript", "It's a programming language", "javascript");
     addFlashCardToArray(flashCardArray, fc1);
-    var fc2 = createFlashCard("What is HTML", "It's a markup language");
+    var fc2 = createFlashCard("What is HTML", "It's a markup language", "HTML");
     addFlashCardToArray(flashCardArray, fc2);
     
     var showFlashCardQuestion = function(targetElement, fc){
