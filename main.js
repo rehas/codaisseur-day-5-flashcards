@@ -18,17 +18,20 @@ var createFlashCard = function(newQuestion, newAnswer, category){
 function submitFlashCard() {
     var inputFieldQuestion = document.getElementById("newfcQuestion").value;
     var inputFieldAnswer = document.getElementById("newfcAnswer").value;
-
-
-    var createNewFlashCard= createFlashCard(inputFieldQuestion, inputFieldAnswer);
+    var inputFieldCatergory = selectedCatergory()
+    var createNewFlashCard= createFlashCard(inputFieldQuestion, inputFieldAnswer, inputFieldCatergory);
     addFlashCardToArray(flashCardArray, createNewFlashCard);
-
-
-
-
-    
   };
-
+var selectedCatergory = function() {
+    var catergories = Array.from(document.getElementsByName('catergory'))
+    for (let index = 0; index < catergories.length; index++) {
+      const element = catergories[index];
+      if (element.checked) {
+      return element.id
+      } else {
+      return "allCat"  
+      }
+    }};
 document.addEventListener('DOMContentLoaded', function() {
     console.log("I'm ready");
     // Object model of the flash card
