@@ -9,6 +9,10 @@ h1{
   border-width: 6;
   padding: 50px;
 }
+#catergoryPicker{
+  display: flex;
+  justify-content: center;
+}
 #fcOnScreen{
   display: flex;
   justify-content: center;
