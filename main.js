@@ -35,7 +35,17 @@ document.addEventListener('DOMContentLoaded', function() {
     
     console.log(flashCardArray);
 
+    console.log(document.getElementById("flashCardGroup1"));
     
+    var showFlashCard = function(targetElement){
+        targetElement.querySelector("child")
+    }
+    
+    var switchFlashCard = function(targetElement){
+
+
+    }
+
 });
 
 
