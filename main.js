@@ -1,7 +1,9 @@
-var flashCardArray = []
+var flashCardArray =  JSON.parse( localStorage.getItem("flashCardsArray")) || [];
+
 var addFlashCardToArray = function(fcArray, fc){
-    fcArray.push(fc)
-    console.log(`new flash card added: ${fc.question} - ${fc.answer}`)
+    fcArray.push(fc);
+    console.log(`new flash card added: ${fc.question} - ${fc.answer}`);
+    localStorage.setItem("flashCardsArray", JSON.stringify(flashCardArray));
 }
 
 // Create new flash card (newQuestion, newAnswer) - Also checks for the current length of the array to give a new id to the flash card
@@ -59,11 +61,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
     
     //createFlashCard and addFlashCardToArray should be called as a pair each time to make sure the id's of new flash cards don't mix up.
-    
+console.log("Check local storage");
+console.log(localStorage.getItem("flashCardsArray") ===null);
+
+if( localStorage.getItem("flashCardsArray") ===null ||  JSON.parse( localStorage.getItem("flashCardsArray")).length < 1){
+
     var fc1 = createFlashCard("What is Javascript", "It's a programming language", "javascript");
     addFlashCardToArray(flashCardArray, fc1);
     var fc2 = createFlashCard("What is HTML", "It's a markup language", "HTML");
     addFlashCardToArray(flashCardArray, fc2);
+    var testElem = document.getElementById("flashCardGroup1");
+    showFlashCardQuestion(testElem, fc2);
+
+}   
     
     var showFlashCardQuestion = function(targetElement, fc){
         // debugger;
@@ -72,8 +82,7 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log("showFlashCardQuestion fired");
         // debugger;
     }
-    var testElem = document.getElementById("flashCardGroup1");
-    showFlashCardQuestion(testElem, fc2);
+    
 
 // This function is fired on click, it shows the answer or the question depending on the state of the flashcard
     var switchFlashCard = function(targetElement){
@@ -146,6 +155,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
         fcArray.splice(index, 1);
 
+        localStorage.setItem("flashCardsArray", JSON.stringify(fcArray));
+        
+
+
     }
 
 
@@ -166,7 +179,16 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    document.getElementById("delete-current-card")
+    document.getElementById("delete-current-card").onclick = function(event){
+        console.log("deleteClicked");
+        var te = event.target.parentElement;
+        console.log(document.getElementsByClassName("fcNumber")[0].innerText);
+        var id = parseInt( document.getElementsByClassName("fcNumber")[0].innerText);
+        console.log(id);
+        
+        deleteCurrentCard(flashCardArray, id);
+
+    }
 
     
 
