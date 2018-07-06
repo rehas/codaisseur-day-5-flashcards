@@ -124,16 +124,24 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     var findIndexOfFlashCardInArray = function (fcArray, fcId){
+        var indexToBeReturned ;
         fcArray.forEach(function(fc, index){
-            if (fc.id === fcId){
-                return index
+            console.log(fc);
+            console.log(index);
+            console.log(fcId);
+            if (fc.id == fcId){
+                indexToBeReturned = index
             }
         })
+        return indexToBeReturned
     }
 
-    console.log(findFlashCardInArray(flashCardArray, 2));
+    console.log("our index is" +  findIndexOfFlashCardInArray(flashCardArray, 2));
 
     var deleteCurrentCard = function(fcArray, cardIdToBeDeleted){
+        var index = findIndexOfFlashCardInArray(fcArray, cardIdToBeDeleted);
+
+        fcArray.splice(index, 1);
 
     }
 
@@ -154,6 +162,8 @@ document.addEventListener('DOMContentLoaded', function() {
             showNextFlashCard(te);
         }
     });
+
+    document.getElementById("delete-current-card")
 
     
 
