@@ -13,8 +13,24 @@ h1{
   display: flex;
   justify-content: center;
 }
-#fcOnScreen{
+#flashCardGroup1{
   display: flex;
   justify-content: center;
   margin: 60px;
+  border-color: cornflowerblue;
+  border-width: 6;
+  padding: 20px;
+}
+#flashForm{
+  display: flex;
+  justify-content: center;
+  border-style: solid;
+  border-color: cornflowerblue;
+  border-width: 6;
+  padding: 20px;
+}
+#delete-current-card{
+  display: flex;
+  justify-content: center;
+  padding: 20px
 }
