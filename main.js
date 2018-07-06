@@ -123,6 +123,21 @@ document.addEventListener('DOMContentLoaded', function() {
         //console.log(flashCardArray);
     }
 
+    var findIndexOfFlashCardInArray = function (fcArray, fcId){
+        fcArray.forEach(function(fc, index){
+            if (fc.id === fcId){
+                return index
+            }
+        })
+    }
+
+    console.log(findFlashCardInArray(flashCardArray, 2));
+
+    var deleteCurrentCard = function(fcArray, cardIdToBeDeleted){
+
+    }
+
+
 // This binds the onclick event of the div to the switchFlashCard Function    
     document.getElementById("flashCardGroup1").addEventListener("click", function(event){
         console.log(event);
