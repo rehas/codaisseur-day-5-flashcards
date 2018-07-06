@@ -1,0 +1,16 @@
+#mainHeading{
+  display: flex;
+  justify-content: center;
+  margin: 50px;
+}
+h1{
+  border-style: solid;
+  border-color: cornflowerblue;
+  border-width: 6;
+  padding: 50px;
+}
+#fcOnScreen{
+  display: flex;
+  justify-content: center;
+  margin: 60px;
+}
