@@ -37,8 +37,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     console.log(document.getElementById("flashCardGroup1"));
     
-    var showFlashCard = function(targetElement){
-        targetElement.querySelector("child")
+    var showFlashCard = function(targetElement, fc){
+        targetElement.querySelector(".fcNumber").innerText = fc.id
     }
     
     var switchFlashCard = function(targetElement){
