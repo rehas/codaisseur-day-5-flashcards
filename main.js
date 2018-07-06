@@ -1,7 +1,29 @@
+var flashCardArray = []
+var addFlashCardToArray = function(fcArray, fc){
+    fcArray.push(fc)
+    console.log(`new flash card added: ${fc.question} - ${fc.answer}`)
+}
+
+// Create new flash card (newQuestion, newAnswer) - Also checks for the current length of the array to give a new id to the flash card
+var createFlashCard = function(newQuestion, newAnswer){
+    var newId = flashCardArray.length +1;
+    return {
+        id : newId,
+        question: newQuestion,
+        answer: newAnswer
+    }
+}
+//Submit flash card function from user data.
+function submitFlashCard() {
+    var inputFieldQuestion = document.getElementById("newfcQuestion").value;
+    var inputFieldAnswer = document.getElementById("newfcAnswer").value;
+    var createNewFlashCard= createFlashCard(inputFieldQuestion, inputFieldAnswer);
+    addFlashCardToArray(flashCardArray, createNewFlashCard);
+  };
+
 document.addEventListener('DOMContentLoaded', function() {
     console.log("I'm ready");
     
-    var flashCardArray = []
     
     // Object model of the flash card
     /* var flashCard = {
@@ -11,20 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
     } */
     
     // Add flash card to array (array to be added to, flash card to be added to array)
-    var addFlashCardToArray = function(fcArray, fc){
-        fcArray.push(fc)
-        console.log(`new flash card added: ${fc.question} - ${fc.answer}`)
-    }
-    
-    // Create new flash card (newQuestion, newAnswer) - Also checks for the current length of the array to give a new id to the flash card
-    var createFlashCard = function(newQuestion, newAnswer){
-        var newId = flashCardArray.length +1;
-        return {
-            id : newId,
-            question: newQuestion,
-            answer: newAnswer
-        }
-    }
+  
 
 // Finds the the flash card in the array when provided with the id and array
 
@@ -67,6 +76,7 @@ document.addEventListener('DOMContentLoaded', function() {
         var id = te.querySelector(".fcNumber").innerHTML;
         var text = te.querySelector(".fcOnScreen").innerText;
         var fcToBeShown = findFlashCardInArray(flashCardArray, id);
+        console.log(flashCardArray);
         
         if (text === fcToBeShown.question){
             te.querySelector(".fcOnScreen").innerText = fcToBeShown.answer
@@ -83,12 +93,11 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log(event.target);
         switchFlashCard(event.target);
     });
-
+    
 
 
 
 });
-
 
 
 
