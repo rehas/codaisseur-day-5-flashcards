@@ -17,8 +17,15 @@ var createFlashCard = function(newQuestion, newAnswer){
 function submitFlashCard() {
     var inputFieldQuestion = document.getElementById("newfcQuestion").value;
     var inputFieldAnswer = document.getElementById("newfcAnswer").value;
+
+
     var createNewFlashCard= createFlashCard(inputFieldQuestion, inputFieldAnswer);
     addFlashCardToArray(flashCardArray, createNewFlashCard);
+
+
+
+
+    
   };
 
 document.addEventListener('DOMContentLoaded', function() {
