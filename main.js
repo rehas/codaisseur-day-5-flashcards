@@ -18,13 +18,29 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Create new flash card (newQuestion, newAnswer) - Also checks for the current length of the array to give a new id to the flash card
     var createFlashCard = function(newQuestion, newAnswer){
-        var newId = flashCardArray.length;
+        var newId = flashCardArray.length +1;
         return {
             id : newId,
             question: newQuestion,
             answer: newAnswer
         }
     }
+
+// Finds the the flash card in the array when provided with the id and array
+
+    var findFlashCardInArray = function(fcArray, id){
+        
+        var fcToBeReturned;
+        
+        fcArray.forEach(function(fc, index){
+            if (fc.id == id){
+                fcToBeReturned = fc;
+            }
+        });
+        console.log(fcToBeReturned);
+        return fcToBeReturned
+    }
+
     
     //createFlashCard and addFlashCardToArray should be called as a pair each time to make sure the id's of new flash cards don't mix up.
     
@@ -33,18 +49,43 @@ document.addEventListener('DOMContentLoaded', function() {
     var fc2 = createFlashCard("What is HTML", "It's a markup language");
     addFlashCardToArray(flashCardArray, fc2);
     
-    console.log(flashCardArray);
-
-    console.log(document.getElementById("flashCardGroup1"));
-    
-    var showFlashCard = function(targetElement, fc){
-        targetElement.querySelector(".fcNumber").innerText = fc.id
+    var showFlashCardQuestion = function(targetElement, fc){
+        targetElement.querySelector(".fcNumber").innerText = fc.id;
+        targetElement.querySelector(".fcOnScreen").innerText = fc.question;
+        console.log("showFlashCardQuestion fired");
     }
-    
+    var testElem = document.getElementById("flashCardGroup1");
+    showFlashCardQuestion(testElem, fc2);
+
+// This function is fired on click, it shows the answer or the question depending on the state of the flashcard
     var switchFlashCard = function(targetElement){
-
-
+        var te = targetElement;
+        if (targetElement.tagName.toLowerCase() === 'p'){
+            te = targetElement.parentElement;
+            console.log(te);
+        }
+        var id = te.querySelector(".fcNumber").innerHTML;
+        var text = te.querySelector(".fcOnScreen").innerText;
+        var fcToBeShown = findFlashCardInArray(flashCardArray, id);
+        
+        if (text === fcToBeShown.question){
+            te.querySelector(".fcOnScreen").innerText = fcToBeShown.answer
+        }else if (text === fcToBeShown.answer){
+            te.querySelector(".fcOnScreen").innerText = fcToBeShown.question
+        }else{
+            return
+        }
     }
+
+// This binds the onclick event of the div to the switchFlashCard Function    
+    document.getElementById("flashCardGroup1").addEventListener("click", function(event){
+        console.log(event);
+        console.log(event.target);
+        switchFlashCard(event.target);
+    });
+
+
+
 
 });
 
