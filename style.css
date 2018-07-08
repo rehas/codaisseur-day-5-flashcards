@@ -32,5 +32,11 @@ h1{
 #delete-current-card{
   display: flex;
   justify-content: center;
-  padding: 20px
+  padding: 20px;
+  color: red;
+}
+.fcNumber{
+  border: 2px solid red;
+  margin-right: 50px;
+  padding: 10px;
 }

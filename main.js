@@ -37,6 +37,7 @@ var selectedCatergory = function() {
       }
     }};
 document.addEventListener('DOMContentLoaded', function() {
+    //location.reload();
     console.log("I'm ready");
     // Object model of the flash card
     /* var flashCard = {
@@ -61,12 +62,19 @@ document.addEventListener('DOMContentLoaded', function() {
         return fcToBeReturned
     }
 
+    var showFlashCardQuestion = function(targetElement, fc){
+        // debugger;
+        targetElement.querySelector(".fcNumber").innerText = fc.id;
+        targetElement.querySelector(".fcOnScreen").innerText = fc.question;
+        console.log("showFlashCardQuestion fired");
+        // debugger;
+    }
     
     //createFlashCard and addFlashCardToArray should be called as a pair each time to make sure the id's of new flash cards don't mix up.
 console.log("Check local storage");
 console.log(localStorage.getItem("flashCardsArray") ===null);
 
-if( localStorage.getItem("flashCardsArray") ===null ||  JSON.parse( localStorage.getItem("flashCardsArray")).length < 1){
+if( localStorage.getItem("flashCardsArray") ===null ||  JSON.parse( localStorage.getItem("flashCardsArray")).length <= 1){
 
     var fc1 = createFlashCard("What is Javascript", "It's a programming language", "javascriptCat");
     addFlashCardToArray(flashCardArray, fc1);
@@ -77,13 +85,7 @@ if( localStorage.getItem("flashCardsArray") ===null ||  JSON.parse( localStorage
 
 }   
     
-    var showFlashCardQuestion = function(targetElement, fc){
-        // debugger;
-        targetElement.querySelector(".fcNumber").innerText = fc.id;
-        targetElement.querySelector(".fcOnScreen").innerText = fc.question;
-        console.log("showFlashCardQuestion fired");
-        // debugger;
-    }
+    
     
 
 // This function is fired on click, it shows the answer or the question depending on the state of the flashcard

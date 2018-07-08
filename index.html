@@ -9,7 +9,10 @@
   <script src="main.js"></script>
 </head>
 <body>
-  <div id="mainHeading"><h1>Javascript Flash Cards</h1></div>
+  <div id="mainHeading">
+    <h1>Javascript Flash Cards</h1>
+  </div>
+  <h2>Please Use Arrow Keys for Getting a random Card</h2>
   <div>
     <form id="categoryPicker">
       <input type="radio" name="catergory" id="allCat" checked> All <br>
@@ -20,9 +23,9 @@
   </div>
   <div id="flashCardsOnScreen" style="font-size: 20px">
     <div class="fcBoxes" id="flashCardGroup1">
-      <p class="fcNumber" style="border: 2px dotted red"> 1 </p>
+      <p class="fcNumber" > 1 </p>
     <br>
-      <p class="fcOnScreen" > What is Javascript? </p>
+      <p class="fcOnScreen" > What is Javascript</p>
     </div>
     <div id="delete-current-card">Delete This Card</div>
       <form id="flashForm" onsubmit="submitFlashCard() ; return false">
